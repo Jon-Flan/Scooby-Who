@@ -1,26 +1,24 @@
 {
-  "name": "dogz",
+  "name": "servertemplate",
   "version": "1.0.0",
-  "description": "Web application for the buying and selling of dogs in Ireland, sellers can only be registered breeders that meet the strict standards, this is to help combat the problem of puppy farms in Ireland. Breeders also have the capabilty of advertising their dogs for stud. The application has the capabilty to leave comments on public adds, ask questions, and to messgae sellers directly. ",
+  "description": "Server Template to use with SQL Connection",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server-env.js"
   },
-  "author": "Jonathan Flanagan, Neil Fitzgerald, Adolfo Carvalho.",
+  "author": "Jonathan Flanagan",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-rate-limit": "^5.1.3",
     "express-session": "^1.17.1",
-    "fs": "0.0.1-security",
     "helmet": "^4.1.1",
     "http": "0.0.1-security",
-    "https": "^1.0.0",
     "mysql": "^2.18.1",
-    "tls": "0.0.1"
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7"
   }
 }
