@@ -2,6 +2,12 @@
 var express = require('express');
 var router = express.Router();
 
+//import and initialize the database connection
+const data = require("../config/db");
+var db = new data.database();
+db.connect;
+//db.addUser;
+
 //import and initialize rate limit class 
 const Limit = require('../config/rateLimit');
 var l = new Limit.rateLimit();

@@ -6,12 +6,6 @@ const bodyParser = require("body-parser");
 require('dotenv').config();//set to default .env but can also be {path: "path/filename"}
 var app = express();
 
-//import and initialize the database connection
-const data = require("./config/db");
-var db = new data.database();
-db.connect;
-db.addUser;
-
 //set view engine & body parser from config
 const viewEngine = require("./config/viewEngine");
 viewEngine(app);
