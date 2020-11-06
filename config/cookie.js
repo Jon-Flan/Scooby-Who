@@ -1,5 +1,5 @@
 //imports
-var session = require("express-session")
+var session = require("cookie-session")
 
 function cookie(app){
     // Use session for identifying logged in user

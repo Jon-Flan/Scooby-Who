@@ -1,29 +1,42 @@
 var mysql = require('mysql');//alows access to mysql and connect to our database
 
-//create the connection variable for the database with all arguments for connection
-// *** The database is a secure server database and only white listed IP's can connect **
-connection = mysql.createConnection({
+//connection details
+function initDB(){
+	connection = mysql.createConnection({
 	host     : process.env.DBHOST,
     user     : process.env.USER,
     password : process.env.PASS,
     database : process.env.DB
 });
-
-
-exports.database = class {
-
-constructor(){
-    //blank constructor
-}    
-
-connect = connection.connect(function(error){
-	if(!!error){
-		console.log('Error Connecting to server');
-	}else{
-		console.log('Connection success');
-	}
-});
-
-addUser = connection.query("INSERT INTO users (uuid, username, email, mobile_phone, name, surname, password) VALUES('12qert', 'testUSer', 'email@email','0864321789','John','Joe','password');");
-
 }
+
+//function to connect to the DB - to be initialised in the routes file
+function connect () {
+	connection.connect(function(error){
+		if(!!error){
+			console.log('Error Connecting to database');
+		}else{
+			console.log('Database connection success');
+		}
+	});
+}
+
+//function to check for the users email in database and return user details for password testing
+function userLogin (email, data){
+	connection.query(`SELECT * FROM users WHERE email = '${email}'`,[email],function(error,results, fields){
+		if(results.length > 0){
+			var user = results;
+			data(error,user);
+		}else{
+			console.log(error);
+			data(error, null);
+		}	
+	});
+}
+
+//test function to add a hashed password to db
+function addUser(password){
+	connection.query(`INSERT INTO users (uuid, username, email, mobile_phone, name, surname, password) 
+					VALUES('12qert', 'testUSer', 'passTest@email','0864321789','John','Joe','${password}')`,[password]);
+}
+module.exports = {initDB, connect, userLogin,addUser};

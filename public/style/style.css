@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Style the top navigation bar */
+  .topnav {
+    overflow: hidden;
+    background-color: #F2612A;
+  }
+
+  .topnav h2 {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin: 0px;
+  }
+
+  
+  /* Style the topnav links */
+  .topnav a {
+    float: right;
+    display: block;
+    background-color: #484848;
+    text-align: center;
+    padding: 8px 25px;
+    margin-right: 14px;
+    margin-top: 7px;
+    text-decoration: none;
+    font-weight: bolder;
+    border-radius: 20px;
+	color: #f2f2f2;
+	font-size: 15px;
+	cursor: pointer;
+	border: solid 2px #484848;
+	/*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+  }
+  
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: #484848;
+    color: #F2612A;
+    border: solid 2px #fff;
+  }
+  
+  /* Style the content */
+  .content {
+    background-color: #ddd;
+    padding: 10px;
+    height: 200px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Style the footer */
+  .footer {
+    background-color: #F2612A;
+    padding: 10px;
+  }
