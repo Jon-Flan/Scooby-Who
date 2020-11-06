@@ -14,6 +14,11 @@ function server(app){
 
     server.listen(port, host,()=>{
         console.log(`Server Running on ${host}:${port}`);
+        if(process.env.NODE_ENV=="production"){
+            console.log("Production Mode, make sure you are not using this mode for development")
+        }else{
+            console.log("Dev mode: safe to develop")
+        }
     });
 }
 
