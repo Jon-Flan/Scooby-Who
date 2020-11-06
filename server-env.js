@@ -6,12 +6,9 @@ const bodyParser = require("body-parser");
 require('dotenv').config();//set to default .env but can also be {path: "path/filename"}
 var app = express();
 
-<<<<<<< Updated upstream
-=======
 //initialise cookies
 const cookie = require("./config/cookie");
 cookie(app);
->>>>>>> Stashed changes
 
 //set view engine & body parser from config
 const viewEngine = require("./config/viewEngine");

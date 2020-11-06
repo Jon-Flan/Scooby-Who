@@ -3,8 +3,6 @@ const bcrypt = require("bcryptjs");
 var express = require('express');
 var router = express.Router();
 
-<<<<<<< Updated upstream
-=======
 //import and connect to database
 const db = require('../config/db');
 db.initDB();
@@ -13,7 +11,6 @@ db.connect();
 //import the custom bcrypt module as crypto
 const crypto = require("../config/auth");
 
->>>>>>> Stashed changes
 //import and initialize rate limit class 
 const Limit = require('../config/rateLimit');
 var l = new Limit.rateLimit();
