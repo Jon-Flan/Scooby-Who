@@ -3,8 +3,8 @@ var mysql = require('mysql');//alows access to mysql and connect to our database
 
 //connection details
 function initDB(){
-	  connection = mysql.createConnection({
-	  host     : process.env.DBHOST,
+	connection = mysql.createConnection({
+	host     : process.env.DBHOST,
     user     : process.env.USER,
     password : process.env.PASS,
     database : process.env.DB

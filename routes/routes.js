@@ -45,23 +45,23 @@ router.get('/login',function(req,res){
 
 //test route for login flow
 router.post('/log', login_limit,function(req,res){
-    var email = 'passTest@email';//login test will only work with this user for bcrypt, must be a hashed password!
+    var email = 'passTest@email';//login test will only work with this user for bcrypt, must be a hased password!
     var password = 'password'; //correct password is password, anything else should return to login page
 
     //if email and password provided
     if(email && password){
         //check for the email in the DB and return the user info
         db.userLogin(email, function(err,userDetails){ 
-            //check the users password
-            console.log(userDetails[0].password);
-            crypto.login(password,userDetails[0].password,req,function(error,cb){
-                if(req.session.loggedin){
-                    res.redirect('/');
-                }else{
-                    res.redirect('/test');
-                }
-                res.end();
-            });
+        //check the users password
+        console.log(userDetails[0].password);
+        crypto.login(password,userDetails[0].password,req,function(error,cb){
+            if(req.session.loggedin){
+                res.redirect('/');
+            }else{
+                res.redirect('/test');
+            }
+            res.end();
+        });
         });
     }
 });
