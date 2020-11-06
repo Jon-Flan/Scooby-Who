@@ -1,14 +1,18 @@
 //imports
 const express = require("express");
+const path = require('path');
 
 
 function viewEngine(app){
     
     // Set static locations
-    app.use("/public",express.static(__dirname + "/views"));
-    app.use("/public",express.static(__dirname + "/partials"));
-    app.use("/public",express.static(__dirname + "/scripts"));
-    app.use("/public",express.static(__dirname + "/images"));
+    app.use(express.static('public'));
+
+    app.use('/style',express.static(__dirname + "/style"));
+    app.use('/images',express.static(__dirname + "/images"));
+    app.use('/scripts',express.static(__dirname + "/scripts"));
+    app.use('/favicon',express.static(__dirname + "/favicon"));
+
 
     //set the view engine
     app.set('view engine', 'ejs');
