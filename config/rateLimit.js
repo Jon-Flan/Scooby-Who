@@ -11,7 +11,7 @@ exports.rateLimit = class {
     // Set Rate Limiting for initial loading of pages & routes
     initialLimit=
         rateLimit({
-        max: 10,// max requests
+        max: 100,// max requests
         windowMs: 60 * 60 * 1000, // per 1 Hour
         handler: function (req, res) {
                 res.send("Oops too many requests");
