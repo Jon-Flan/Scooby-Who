@@ -18,6 +18,11 @@ viewEngine(app);
 const security = require("./config/security");
 security(app);
 
+//import and connect to database
+const db = require('./config/db');
+db.initDB();
+db.connect();
+
 //initialize server
 const server = require("./config/server");
 server(app);
@@ -27,3 +32,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //initialize routes
 app.use(require("./routes/routes"));
+

@@ -14,5 +14,14 @@ function login(password1, password2, req,cb){
     });
 }
 
+function hashPass(password,cb){
 
-module.exports = {login};
+    bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(password, salt, function(error, hash){
+            cb(hash);
+        });
+    });
+};
+
+
+module.exports = {login, hashPass};
