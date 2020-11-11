@@ -1,5 +1,6 @@
 var mysql = require('mysql');//alows access to mysql and connect to our database
 
+
 //connection details
 function initDB(){
 	connection = mysql.createConnection({
@@ -32,6 +33,7 @@ function userCheck(email, data){
 		}	
 	});
 }
+
 
 //function to add a user with uuid, email & hashed password to db and send verification email
 function addStandardUser(uuid,email,password){
