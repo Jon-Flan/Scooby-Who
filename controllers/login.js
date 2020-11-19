@@ -4,18 +4,22 @@ var DB = require('../models');
 //import our custom bcrypt module as crypto
 const crypto = require("../config/auth");
 
+//used to validate emails
+const validator = require("email-validator");
+
 //receives email and password via POST:/login, checks if the email exists in the database
 //then hashes received password with the password on the DB (which should be hashed already)
-exports.makeLogin = async function(req, res) {
+exports.loginAttempt = async function(req, res) {
 	var email = req.body.email;
     var password = req.body.password;
     
     //test user input again if somehow a mallicous entry also validate email address
     var reg = new RegExp ("^[A-Za-z0-9#!@]+$");
+    var emailOk = validator.validate(email);
     var passwordOk = reg.test(password);
 
     //if email and password provided and the password was sanitized successfully
-    if(email && password && passwordOk){
+    if(email && password && passwordOk && emailOk){
     	//looks for a user in the DB with the provided email
     	//using findOne function coz shouldn't be 2 anyways
     	user = await DB.users.findOne({where: {email: email}});

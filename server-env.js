@@ -49,22 +49,20 @@ app.get('/',refreshLimit,function(req,res){
     res.end();
 });
 
+//routes related to login
+app.post('/login', login_limit, loginController.loginAttempt);
+app.get('/login', loginController.loginPage);
+app.get('/logout', refreshLimit, loginController.logout);
+
+//routes related to sign_up
+app.get('/sign_up', refreshLimit, userController.create);
+app.post('/sign_up', refreshLimit, userController.store);
+
+//routes related to user profile
+app.put('/users/:uuid', refreshLimit, userController.update);
+
 //invalid routes automatically redirected
 app.get('*',function(req,res){
     res.redirect('/');
 });
-
-//routes related to login
-app.post('/login', login_limit, loginController.makeLogin);
-app.get('/login', loginController.loginPage);
-app.get('/logout', refreshLimit, loginController.logout);
-
-//routes related to users
-app.get('/sign_up', refreshLimit, userController.create);
-app.post('/users', refreshLimit, userController.store);
-app.put('/users/:uuid', refreshLimit, userController.update);
-
-
-
-//app.use(require("./routes/routes"));
 
