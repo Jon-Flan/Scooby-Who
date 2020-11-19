@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    //everytime an ID need to be made public, as a link or printed on the screen we'll use UUID to prevent spoofing
     uuid: {
       type: DataTypes.STRING(36),
       allowNull: true
@@ -35,11 +36,13 @@ module.exports = function(sequelize, DataTypes) {
         notNull: true
       }
     },
+    //C for a customer of B for a breeder
     user_type: {
         type: DataTypes.STRING(1),
         allowNull: false,
-        default: 'C'
+        defaultValue: 'C'
     },
+    //this field will be null as default...after user confirms the e-mail via a link, then it'll contain the timestamp of when that happened
     validated_at: {
       type: DataTypes.DATE,
       allowNull: true,
@@ -57,6 +60,7 @@ module.exports = function(sequelize, DataTypes) {
       field: 'updated_at',
       allowNull: true
     },
+    //for softdeletes
     deletedAt: {
       type: DataTypes.DATE,
       field: 'deleted_at',
