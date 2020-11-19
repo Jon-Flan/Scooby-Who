@@ -5,8 +5,8 @@ var mysql = require('mysql');//alows access to mysql and connect to our database
 function initDB(){
 	connection = mysql.createConnection({
 	host     : process.env.DBHOST,
-    user     : process.env.USER,
-    password : process.env.PASS,
+    user     : process.env.DBUSER,
+    password : process.env.DBPASS,
     database : process.env.DB
 });
 }
@@ -37,7 +37,7 @@ function userCheck(email, data){
 
 //function to add a user with uuid, email & hashed password to db and send verification email
 function addStandardUser(uuid,email,password){
-	connection.query(`INSERT INTO users (uuid, username, email, mobile_phone, name, surname, password) 
-					VALUES('${uuid}', 'testUSer', '${email}','0864321789','John','Joe','${password}')`,[uuid,email,password]);
+	connection.query(`INSERT INTO users (uuid, username, email, password, user_type) 
+					VALUES('${uuid}', 'testUSer', '${email}','${password}', 'C')`,[uuid,email,password]);
 }
 module.exports = {initDB, connect, userCheck,addStandardUser};
