@@ -1,17 +1,10 @@
 //imports
 var rateLimit = require("express-rate-limit");
 
-
-exports.rateLimit = class {
-    constructor()
-    {
-        //blank constructor
-    }
-
     // Set Rate Limiting for initial loading of pages & routes
-    initialLimit=
+     const refreshLimit=
         rateLimit({
-        max: 100,// max requests
+        max: 30,// max requests
         windowMs: 60 * 60 * 1000, // per 1 Hour
         handler: function (req, res) {
                 res.send("Oops too many requests");
@@ -19,7 +12,7 @@ exports.rateLimit = class {
         });
     
     // Set Rate Limiting for initial loading of pages & routes
-    loginLimit=
+   const loginLimit=
         rateLimit({
         max: 3,// max requests
         windowMs: 15 * 60 * 1000, // per 15min 
@@ -28,7 +21,7 @@ exports.rateLimit = class {
             res.send("Too many login attempts made");
             },
         }); 
-}
-    
 
+
+module.exports = {refreshLimit , loginLimit};
 

@@ -26,20 +26,21 @@ exports.loginAttempt = async function(req, res) {
 
     	//if no user was found with that email, redirect to login with not authorized status
     	if (user===null) {
-    		res.redirect(401, '/login');
+    		res.redirect('/login');
     	} else {    		
 	    	//compares the password provided by the user with the password from the database
-	    	crypto.login(password, user.password, req, function(error, cb){
-	    		//if it worked, then redirects to the home page
-	    		if (req.session.loggedin)
-	    			res.redirect('/');
-	    		//if not redirects to login
-	    		else
-	    			res.redirect(401, '/login');
+	    	crypto.login(password, user.password, req, function(){
+	    		//if it worked, add the uuid to the session & redirect back to the home page
+	    		if (req.session.loggedin){
+					req.session.uuid = user.uuid;
+					res.redirect('/');
+	    		//if not redirect to login page
+				}else
+	    			res.redirect('/login');
 	    	});
 	    }
     } else {
-    	res.redirect(401, '/login');
+    	res.redirect('/login');
     }
 }
 
