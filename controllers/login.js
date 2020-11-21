@@ -33,7 +33,7 @@ exports.loginAttempt = async function(req, res) {
 	    		//if it worked, then redirects to the home page
 	    		if (req.session.loggedin){
 					req.session.uuid = user.uuid;
-					res.redirect('/home/:uuid');
+					res.redirect('/');
 	    		//if not redirects to login
 				}else
 	    			res.redirect('/login');

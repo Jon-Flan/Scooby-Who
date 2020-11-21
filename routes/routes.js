@@ -3,27 +3,21 @@ const express = require('express');
 const router = express.Router();
 
 //required controllers
+var mainPageController = require('../controllers/mainPage');
 var loginController = require('../controllers/login');
 var userController = require('../controllers/usersMain');
 var standardUserController = require('../controllers/usersStandard');
 var breederUserController = require('../controllers/usersBreeder');
-var mainPageController = require('../controllers/mainPage');
-
-// Main route, all users can visit this page to view adds, certain functionality will not be possible until logged in
-router.get('/',function(req,res){
-    res.render('index');
-    res.end();
-});
 
 //home page once logged in
-router.get('/home/:uuid', mainPageController.homePage);
+router.get('/', mainPageController.homePage);
 
 //routes related to login
 router.post('/login', loginController.loginAttempt);
 router.get('/login', loginController.loginPage);
 router.get('/logout', loginController.logout);
 
-//routes related to sign_up
+//main route for sign_up page (account tyoe selection)
 router.get('/sign_up', userController.signup);
 
 //routes for a Breeder to sign up

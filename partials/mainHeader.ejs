@@ -25,8 +25,19 @@
 <!-- Top Bar Navigation -->
 <aside>
     <div class="topnav">
-        <a id="SignIn" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>SignIn</a>
-        <a id="SignUp" href="/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>SignUp</a>
+        <% if(user === null){ %>
+            <a id="SignIn" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>SignIn</a>
+            <a id="SignUp" href="/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>SignUp</a>
+        <%  }else{ %>
+            <div class="dropdown">
+              <button class="dropbtn"><i class="fa fa-user"></i><%= user.username %> &#9660;</button>
+                <div class="dropdown-content">
+                  <a href="#">Edit Profile</a>
+                  <a href="#">Messages</a>
+                  <a href="/logout">Logout</a>
+                </div>
+            </div>
+        <%  } %>
         <br>
         <br>
         <span ><h5 class="filter"><i class="fa fa-filter"></i>Filters: Filters will go here</h5></span>
