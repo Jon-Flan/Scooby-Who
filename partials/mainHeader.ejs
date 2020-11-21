@@ -25,6 +25,7 @@
 <!-- Top Bar Navigation -->
 <aside>
     <div class="topnav">
+      <!-- different nav bars depending on if a user is logged in or not-->
         <% if(user === null){ %>
             <a id="SignIn" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>SignIn</a>
             <a id="SignUp" href="/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>SignUp</a>
@@ -40,6 +41,7 @@
         <%  } %>
         <br>
         <br>
+        <!-- filter section will be here -->
         <span ><h5 class="filter"><i class="fa fa-filter"></i>Filters: Filters will go here</h5></span>
     </div>
 </aside>

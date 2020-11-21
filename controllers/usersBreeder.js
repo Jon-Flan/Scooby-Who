@@ -35,8 +35,12 @@ exports.storeBreeder = async function(req, res) {
 
     //if password and email were sanitized correctly
     if(passwordOk && emailOk && usernameOk){
+        //find if that user email or username already exists
         user = await DB.users.findOne({where: {email: email}});
+        user = await DB.users.findOne({where: {username: username}});
+
         if (user===null){
+            //if it doesn't then hash the password and pass all the details to the DB
             crypto.hashPass(password, function(hash){
                 newUser = DB.users.build(req.body);
                 newUser.uuid = uuidv4();
@@ -45,8 +49,10 @@ exports.storeBreeder = async function(req, res) {
                 newUser.user_type = 'B';
                 newUser.save();
             });
+            //if everything is ok redirect to the home page
             res.redirect('/');
         }else{
+            //otherwise redirect back to the sign_up page and incriment the signup limiter (to be implimented)
             res.redirect('/sign_up');
         }
     }
