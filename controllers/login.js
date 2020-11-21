@@ -29,12 +29,13 @@ exports.loginAttempt = async function(req, res) {
     		res.redirect('/login');
     	} else {    		
 	    	//compares the password provided by the user with the password from the database
-	    	crypto.login(password, user.password, req, function(error, cb){
+	    	crypto.login(password, user.password, req, function(){
 	    		//if it worked, then redirects to the home page
-	    		if (req.session.loggedin)
-	    			res.redirect('/');
+	    		if (req.session.loggedin){
+					req.session.uuid = user.uuid;
+					res.redirect('/home/:uuid');
 	    		//if not redirects to login
-	    		else
+				}else
 	    			res.redirect('/login');
 	    	});
 	    }

@@ -7,12 +7,16 @@ var loginController = require('../controllers/login');
 var userController = require('../controllers/usersMain');
 var standardUserController = require('../controllers/usersStandard');
 var breederUserController = require('../controllers/usersBreeder');
+var mainPageController = require('../controllers/mainPage');
 
 // Main route, all users can visit this page to view adds, certain functionality will not be possible until logged in
 router.get('/',function(req,res){
     res.render('index');
     res.end();
 });
+
+//home page once logged in
+router.get('/home/:uuid', mainPageController.homePage);
 
 //routes related to login
 router.post('/login', loginController.loginAttempt);
