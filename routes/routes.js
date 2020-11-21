@@ -9,7 +9,7 @@ var userController = require('../controllers/usersMain');
 var standardUserController = require('../controllers/usersStandard');
 var breederUserController = require('../controllers/usersBreeder');
 
-//home page once logged in
+//home page, logged in users have more functionality
 router.get('/', mainPageController.homePage);
 
 //routes related to login
