@@ -22,7 +22,8 @@ exports.loginAttempt = async function(req, res) {
     if(email && password && passwordOk && emailOk){
     	//looks for a user in the DB with the provided email
     	//using findOne function coz shouldn't be 2 anyways
-    	user = await DB.users.findOne({where: {email: email}});
+        //also filtering to look only for activated users
+    	user = await DB.users.findOne({where: {email: email, validated_at: {[DB.Sequelize.Op.not]: null}}});
 
     	//if no user was found with that email, redirect to login with not authorized status
     	if (user===null) {

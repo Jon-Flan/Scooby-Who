@@ -10,6 +10,9 @@ const { v4: uuidv4 } = require('uuid');
 //used to validate emails
 const validator = require("email-validator");
 
+//class for sending emails
+const Mailer = require("../config/mailer");
+
 //breeder sign up page
 exports.breederSignUp = function (req, res){
     //can only create an account if not already loggged in
@@ -48,6 +51,11 @@ exports.storeBreeder = async function(req, res) {
                 newUser.password = hash;
                 newUser.user_type = 'B';
                 newUser.save();
+
+                //sending a welcome e-mail so user can activate their account
+                var mailer = new Mailer();
+                mailer.sendWelcomEmail(newUser.uuid, newUser.email);
+
             });
             //if everything is ok redirect to the home page
             res.redirect('/');
