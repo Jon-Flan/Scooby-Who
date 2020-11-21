@@ -1,12 +1,42 @@
-<%- include ("../partials/mainHeader") %>
-<h1>Sign-Up</h1>
-<form class="form sign_up" id="form2" name="SignUpForm" accept-charset="UTF-8" action='/newUser' method='post'>
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password">
-        <button class="submit" type="submit">Submit</button>
-</form>
-<a href="/">Home</a>
+<%- include ("../partials/SignUpHeader") %>
 
-<%- include ("../partials/mainFooter") %>
+<!-- Choose the Account Type-->
+<div class="accountType">
+        <h2>Choose Account Type</h2>
+        <div class="userSelect">
+                <a href="/userSignUp">
+                        <div class="userType">
+                                <div class="typePic1">
+
+                                </div>
+                                <div class="typeDescr">
+                                        <h2>Standard</h2>
+                                        <ul>
+                                                <li>Buy</li>
+                                                <li>Message Breeders</li>
+                                                <li>Leave reviews</li>
+                                                <li>Easy setup</li>
+                                        </ul>
+                                </div>
+                        </div>
+                </a>
+                <a href="/breederSignUp">
+                        <div class="userType">
+                                <div class="typePic2">
+
+                                </div>
+                                <div class="typeDescr">
+                                        <h2>Breeder</h2>
+                                        <ul>
+                                                <li>Sell & Stud</li>
+                                                <li>Messaging</li>
+                                                <li>Leave reviews</li>
+                                                <li>Account verified</li>
+                                        </ul>
+                                </div>
+                        </div>
+                </a>
+        </div>    
+</div>
+
+<%- include ("../partials/chooseFooter") %>

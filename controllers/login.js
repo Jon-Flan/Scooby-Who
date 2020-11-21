@@ -26,7 +26,7 @@ exports.loginAttempt = async function(req, res) {
 
     	//if no user was found with that email, redirect to login with not authorized status
     	if (user===null) {
-    		res.redirect(401, '/login');
+    		res.redirect('/login');
     	} else {    		
 	    	//compares the password provided by the user with the password from the database
 	    	crypto.login(password, user.password, req, function(error, cb){
@@ -35,11 +35,11 @@ exports.loginAttempt = async function(req, res) {
 	    			res.redirect('/');
 	    		//if not redirects to login
 	    		else
-	    			res.redirect(401, '/login');
+	    			res.redirect('/login');
 	    	});
 	    }
     } else {
-    	res.redirect(401, '/login');
+    	res.redirect('/login');
     }
 }
 

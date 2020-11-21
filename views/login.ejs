@@ -1,11 +1,20 @@
-<%- include ("../partials/mainHeader") %>
-<h1>Login</h1>
-<form class="form sign_in" id="form1" name="loginForm" accept-charset="UTF-8" action='/login' method='post'>
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password">
+<%- include ("../partials/LoginHeader") %>
+
+<form class="form sign_in" id="form2" name="loginForm" accept-charset="UTF-8" action='/login' method='post'>
+        <h1>Login</h1>
+        <label>
+                <i class="fa fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" maxlength="35">
+        </label>
+        <label>
+                <i class="fa fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" id="myInput" maxlength="20">
+                <span class="eye">
+                        <i id="hide1" class="fa fa-eye"></i>
+                        <i id="hide2" class="fa fa-eye-slash"></i>						
+                </span>
+        </label>
         <button class="submit" type="submit">Submit</button>
+        <p> Forgot Password?<a href="#"> click here</a></p>
 </form>
-<a href="/">Home</a>
-<%- include ("../partials/mainFooter") %>
+<%- include ("../partials/LoginFooter") %>
