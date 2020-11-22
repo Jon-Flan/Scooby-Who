@@ -14,7 +14,7 @@ exports.signup = function(req, res){
     if(req.session.loggedin){
         res.redirect('/')
     }else{
-        res.render("SignUp");
+        res.render("SignUp",{verify:false});
     }
     res.end();
 }
@@ -87,7 +87,7 @@ exports.activateAccount = async function(req, res){
             } else {
                 user.validated_at = DB.sequelize.fn('NOW');
                 user.save();
-                res.redirect('/');
+                res.render('login',{unAuth:"activated"});
             }
         }
     });

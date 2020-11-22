@@ -36,7 +36,7 @@ class Mailer{
         //setting options for the welcome email
         this.mailOptions.subject = "Activate your account"
         this.mailOptions.to = emailTo;
-        this.mailOptions.html = "<b>Thanks for registering with us!</b><br/>Please <a href='http://localhost:8001/users/activate/"+token+"' action='_blank'>click here</a> to activate your account.",
+        this.mailOptions.html = "<b>Thanks for registering with us!</b><br/>Please <a href='http://127.0.0.1:8001/users/activate/"+token+"' action='_blank'>click here</a> to activate your account.",
 
         //sending an email and logging any errors        
         this.transporter.sendMail(this.mailOptions, function(error, info){

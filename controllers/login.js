@@ -27,7 +27,7 @@ exports.loginAttempt = async function(req, res) {
 
     	//if no user was found with that email, redirect to login with not authorized status
     	if (user===null) {
-    		res.redirect('/login');
+    		res.render('login',{unAuth: "true"});
     	} else {    		
 	    	//compares the password provided by the user with the password from the database
 	    	crypto.login(password, user.password, req, function(){
@@ -37,11 +37,11 @@ exports.loginAttempt = async function(req, res) {
 					res.redirect('/');
 	    		//if not redirect to login page
 				}else
-	    			res.redirect('/login');
+	    			res.render('login',{unAuth:"true"});
 	    	});
 	    }
     } else {
-    	res.redirect('/login');
+    	res.render('login',{unAuth:"true"});
     }
 }
 
@@ -50,16 +50,22 @@ exports.loginPage = function(req, res){
 	if(req.session.loggedin){
         res.redirect('/');
     }else{
-        res.render("login");
+        res.render("login",{unAuth:"false"});
     }
     res.end();
 }
 
 //nullify the session and redirects to the home page
 exports.logout = function(req, res){
-    //set the session to null as per documentation
-    req.session = null;
-    //redirect to  home page logged out
-	res.redirect('/');
-    res.end();
+	if(req.session.loggedin){
+		//set the session to null as per documentation
+		req.session = null;
+		//redirect to  home page logged out
+		res.redirect('/');
+
+	}else{
+		//redirect to  home page logged out
+		res.redirect('/');
+	}
+	res.end(); 
 }

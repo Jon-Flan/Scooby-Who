@@ -1,3 +1,6 @@
+//sequelize import
+const { Op } = require("sequelize");
+
 //models
 var DB = require('../models');
 
@@ -19,7 +22,7 @@ exports.breederSignUp = function (req, res){
     if(req.session.loggedin){
         res.redirect('/')
     }else{
-        res.render("breederSignUp");
+        res.render("breederSignUp",{AccExists: true});
     }
     //res.end();
 }
@@ -39,8 +42,15 @@ exports.storeBreeder = async function(req, res) {
     //if password and email were sanitized correctly
     if(passwordOk && emailOk && usernameOk){
         //find if that user email or username already exists
-        user = await DB.users.findOne({where: {email: email}});
-        user = await DB.users.findOne({where: {username: username}});
+        user = await DB.users.findOne({
+            where:{
+                [Op.or]:[
+                    {email: email},
+                    {username:username}
+                ]
+            }
+        });
+
 
         if (user===null){
             //if it doesn't then hash the password and pass all the details to the DB
@@ -55,13 +65,12 @@ exports.storeBreeder = async function(req, res) {
                 //sending a welcome e-mail so user can activate their account
                 var mailer = new Mailer();
                 mailer.sendWelcomEmail(newUser.uuid, newUser.email);
-
             });
-            //if everything is ok redirect to the home page
-            res.redirect('/');
+            //if everything is ok render the SignUp page with pop up message of verification
+            res.render('SignUp',{verify: true});
         }else{
             //otherwise redirect back to the sign_up page and incriment the signup limiter (to be implimented)
-            res.redirect('/sign_up');
+            res.render("breederSignUp",{AccExists: true});
         }
     }
 }

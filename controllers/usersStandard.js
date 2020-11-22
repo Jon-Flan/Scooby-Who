@@ -1,3 +1,6 @@
+//sequelize import
+const { Op } = require("sequelize");
+
 //models
 var DB = require('../models');
 
@@ -19,7 +22,7 @@ exports.standardSignUp = function (req, res){
     if(req.session.loggedin){
         res.redirect('/')
     }else{
-        res.render("userSignUp");
+        res.render("userSignUp",{AccExists: false});
     }
     //res.end();
 }
@@ -40,7 +43,15 @@ exports.storeUser = async function(req, res) {
 
     //if password and email were sanitized correctly
     if(passwordOk && emailOk && usernameOk){
-        user = await DB.users.findOne({where: {email: email}});
+        user = await DB.users.findOne({
+            where:{
+                [Op.or]:[
+                    {email: email},
+                    {username:username}
+                ]
+            }
+        });
+
         if (user===null){
             crypto.hashPass(password, function(hash){
                 newUser = DB.users.build(req.body);
@@ -53,11 +64,11 @@ exports.storeUser = async function(req, res) {
                 //sending a welcome e-mail so user can activate their account
                 var mailer = new Mailer();
                 mailer.sendWelcomEmail(newUser.uuid, newUser.email);
-
-                res.redirect('/registration-completed');
-            });            
+            });  
+             //if everything is ok render the SignUp page with pop up message of verification
+            res.render('SignUp',{verify: true});         
         }else{
-            res.redirect('/sign_up');
+            res.render("userSignUp",{AccExists: true});
         }
     }
 }
