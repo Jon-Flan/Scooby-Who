@@ -19,6 +19,23 @@
 </form>
 </section>
 
+<% if (unAuth == 'true') { %>
+        <script>
+         swal(
+            'Oh no!',
+            'Email / Password Incorrect\nOr you may not have activated your account yet',
+            'error'
+        )
+       </script>
+       <% }else if (unAuth == 'activated') { %>
+        <script>
+                swal(
+                   'Activated!',
+                   'Account activated please login',
+                   'success'
+               )
+              </script>
+              <% } %>
 </body>
 <script type="text/javascript" src="/scripts/eye.js"></script> 
 <script type="text/javascript" src="/scripts/verify.js"></script><!-- eye JS file for showing/hiding password -->

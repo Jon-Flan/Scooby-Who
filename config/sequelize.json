@@ -1,17 +1,17 @@
 {
   "development": {
-      "username": "scooby",
-      "password": "[d0G84@c2",
-      "database": "scooby_who",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+    "username": "u1518531_d0gr3",
+    "password": "[d0G84@c2",
+    "database": "db1518531_d0gz845c",
+    "host": "mysql4364.cp.blacknight.com",
+    "dialect": "mysql"
   },
 "test": {
-  "username": "root",
-  "password": null,
-  "database": "database_test",
-  "host": "127.0.0.1",
-  "dialect": "mysql"
+  "username": "u1518531_d0gr3",
+      "password": "[d0G84@c2",
+      "database": "db1518531_d0gz845c",
+      "host": "mysql4364.cp.blacknight.com",
+      "dialect": "mysql"
 },
   "production": {
       "username": "u1518531_d0gr3",

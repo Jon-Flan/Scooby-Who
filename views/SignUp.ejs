@@ -41,5 +41,15 @@
 
 </section>
 
+<% if (verify) { %>
+        <script>
+         swal(
+            'Success!',
+            'Account created,\nYou need to verify your account before you can log in.\nPlease check your email and click the verification link provided',
+            'success'
+        )
+       </script>
+       <% } %>
+
 </body>
 </html>

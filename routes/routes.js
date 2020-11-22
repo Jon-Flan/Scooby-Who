@@ -30,6 +30,7 @@ router.post('/sign_up', standardUserController.storeUser);
 
 //routes related to user profile
 router.put('/users/:uuid', userController.update);
+router.get('/users/activate/:jwt', userController.activateAccount);
 
 //invalid routes automatically redirected
 router.get('*',function(req,res){

@@ -4,6 +4,9 @@ var DB = require('../models');
 //import our custom bcrypt module as crypto
 const crypto = require("../config/auth");
 
+//used to generate a token to be send for email verification
+const jwt = require('jsonwebtoken');
+
 
 //renders the form to create a new user via GET:/users
 exports.signup = function(req, res){
@@ -11,7 +14,7 @@ exports.signup = function(req, res){
     if(req.session.loggedin){
         res.redirect('/')
     }else{
-        res.render("SignUp");
+        res.render("SignUp",{verify:false});
     }
     res.end();
 }
@@ -21,7 +24,11 @@ exports.update = async function(req, res) {
     //used to sanitize user inputs (password, mobile phone, etc)
     var reg = new RegExp ("^[A-Za-z0-9#!@?&*]+$");
 
+    var oldPassword = req.body.password;
+    var newPassword = req.body.new_password;
+
     //searches for the user by the uuid passed via the header
+    //retrieving also not yet activated accounts in case user forgot password b4 activating
     user = await DB.users.findOne({where: { uuid: req.params.uuid }});
 
     //if no user was found with that uuid then returns not found
@@ -30,15 +37,15 @@ exports.update = async function(req, res) {
     } else {
         //if the id retrieved from the DB isn't the same as the logged in ID, also returns a forbiden
             
-        //if the password was provided then have to set our model password the save as the passed password
-        if (req.body.password!=null) {
-            //test user input again if somehow a mallicous entry also validate email address
-            var passwordOk = reg.test(password);
+        //if old and new passwords were provided then have to set our model password the save as the passed new password
+        if ((oldPassword!=null)&&(newPassword!=null)) {
+            //test user input again if somehow a mallicous entry 
+            var passwordsOk = reg.test(oldPassword)&&reg.test(newPassword);
 
             //if password and email were sanitized correctly 
-            if (passwordOk) {
+            if (passwordsOk) {
                 //hasing the passed password
-                crypto.hashPass(req.body.passwod, function(hash){
+                crypto.hashPass(newPassword, function(hash){
                     user.password = hash;
                 });
             }
@@ -68,4 +75,20 @@ exports.update = async function(req, res) {
 
         res.redirect('/');
     }
+}
+
+exports.activateAccount = async function(req, res){
+    jwt.verify(req.params.jwt, process.env.ACCESS_TOKEN, async (err, uuid)=>{
+        if (err) res.redirect(500, '/');
+        else {
+            user = await DB.users.findOne({where: {uuid: uuid, validated_at: null}});
+            if (user===null){
+                res.redirect(404, '/');
+            } else {
+                user.validated_at = DB.sequelize.fn('NOW');
+                user.save();
+                res.render('login',{unAuth:"activated"});
+            }
+        }
+    });
 }
