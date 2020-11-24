@@ -22,7 +22,7 @@ exports.breederSignUp = function (req, res){
     if(req.session.loggedin){
         res.redirect('/')
     }else{
-        res.render("breederSignUp",{AccExists: true});
+        res.render("breederSignUp",{AccExists: false});
     }
     //res.end();
 }

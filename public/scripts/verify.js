@@ -6,7 +6,7 @@ $(document).ready(function(){
         var z = document.forms["SignUpForm"]["email"].value;
 
 		var reg1 = new RegExp("^[A-Za-z0-9]+$");
-		var reg2 = new RegExp ("^[A-Za-z0-9#!@]+$");
+		var reg2 = new RegExp ("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$");
 
 		var result1 = reg1.test(x);
         var result2 = reg2.test(y);
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		}
 
 		if (result1 === false && result2 === false){
-			swal("Error","Username must be alphanumerical only, and Password contains illegal characters","error");
+			swal("Error","Username must be alphanumerical only, and Password must be minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character from: #?!@$%^&*-","error");
 			return false
 		}
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
 		}
 
 		if (result2 === false ){
-			swal("Error","Password contains illegal characters","error");
+			swal("Error","Password must be minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character from: #?!@$%^&*-","error");
 			return false;
         }
 
@@ -45,7 +45,7 @@ $(document).ready(function(){
         var y = document.forms["loginForm"]["password"].value;
 
 		var reg1 = new RegExp("^[A-Za-z0-9@._]+$");
-		var reg2 = new RegExp ("^[A-Za-z0-9#!@]+$");
+		var reg2 = new RegExp ("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$");
 
 		var result1 = reg1.test(x);
         var result2 = reg2.test(y);
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		}
 
 		if (result2 === false ){
-			alert("Error","Password contains illegal characters","error");
+			alert("Error","Password error","error");
 			return false;
         }
         
