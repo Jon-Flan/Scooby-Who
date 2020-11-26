@@ -26,5 +26,17 @@ function hashPass(password,cb){
     });
 };
 
+//middleware only called when user is accessing authenticated-only areas
+//if user is not logged in, redirects to the homepage
+function isLoggedIn(req, res, next){
+    if (req.session.loggedin) {
+        next();
+    }
+    else {
+        console.log('fudeu');
+        res.render('index', {user: null});
+    }
+}
 
-module.exports = {login, hashPass};
+
+module.exports = {login, hashPass, isLoggedIn};

@@ -30,10 +30,19 @@ exports.loginAttempt = async function(req, res) {
     		res.render('login',{unAuth: "true"});
     	} else {    		
 	    	//compares the password provided by the user with the password from the database
-	    	crypto.login(password, user.password, req, function(){
+	    	crypto.login(password, user.password, req, async function(){
 	    		//if it worked, add the uuid to the session & redirect back to the home page
 	    		if (req.session.loggedin){
+					//if user is a customer, loads the profile from the customers table
+					if (user.user_type=='C') {
+						user.profile = await DB.customers.findOne({where: {user_id: user.id }});
+					} 
+					//if it's a breeder, then loads the profile from the breeders table
+					else if (user.user_type=='B') {
+						user.profile = await DB.breeders.findOne({where: {user_id: user.id }});
+					}
 					req.session.uuid = user.uuid;
+					req.session.user = user;
 					res.redirect('/');
 	    		//if not redirect to login page
 				}else

@@ -3,6 +3,7 @@ var DB = require('../models');
 
 //import our custom bcrypt module as crypto
 const crypto = require("../config/auth");
+const bcrypt = require("bcryptjs");
 
 //used to generate a token to be send for email verification
 const jwt = require('jsonwebtoken');
@@ -19,61 +20,44 @@ exports.signup = function(req, res){
     res.end();
 }
 
-//updates a userprofile via PUT:/users/:uuid
-exports.update = async function(req, res) {
-    //used to sanitize user inputs (password, mobile phone, etc)
-    var reg = new RegExp ("^[A-Za-z0-9#!@?&*]+$");
+//to be accessed via GET:/users/change_password generates the page to change password
+//only call inside the middleware /config/auth/isLoggedIn
+exports.changePassword = function(req, res){
+    res.render("change-password",{AccExists: false});
+}
 
-    var oldPassword = req.body.password;
+//updates a userprofile via PUT:/users/change_password/:uuid
+exports.updatePassword = async function(req, res) {
     var newPassword = req.body.new_password;
+    var oldPassword = req.body.old_password;
+    
+    ////used to sanitize user inputs 
+    var reg = new RegExp ("^[A-Za-z0-9#!@?&*]+$");
+    var passwordsOk = (reg.test(newPassword)) && (reg.test(oldPassword));
 
-    //searches for the user by the uuid passed via the header
-    //retrieving also not yet activated accounts in case user forgot password b4 activating
-    user = await DB.users.findOne({where: { uuid: req.params.uuid }});
+    //if both passwords were provided and they were sanitized successfully
+    if(newPassword && oldPassword && passwordsOk){
+        //looks for a user in the DB by the UUID passed as a parameter
+        user = await DB.users.findOne({where: { uuid: req.params.uuid }});
 
-    //if no user was found with that uuid then returns not found
-    if (user===null){
-        res.redirect('/');
+        //if no user was found with that email, redirect to password change again with not authorized status
+        if (user===null) {
+            res.render('login',{unAuth: "true"});
+        } else {            
+            //compares the password provided by the user with the password from the database
+            bcrypt.compare(oldPassword, user.password, function(err, result){
+                //if comparison successful, then hashes new password and sets it to the model
+                if (result){
+                    crypto.hashPass(newPassword, function(hash){
+                        user.password = hash;
+                    });
+                    //saves new password
+                    user.save();
+                }
+            });
+        }
     } else {
-        //if the id retrieved from the DB isn't the same as the logged in ID, also returns a forbiden
-            
-        //if old and new passwords were provided then have to set our model password the save as the passed new password
-        if ((oldPassword!=null)&&(newPassword!=null)) {
-            //test user input again if somehow a mallicous entry 
-            var passwordsOk = reg.test(oldPassword)&&reg.test(newPassword);
-
-            //if password and email were sanitized correctly 
-            if (passwordsOk) {
-                //hasing the passed password
-                crypto.hashPass(newPassword, function(hash){
-                    user.password = hash;
-                });
-            }
-        }
-            
-        //if the mobile phone was provided then have to set our model mobile phone the save as the passed mobile phone
-        if (req.body.mobile_phone!=null) { 
-            //test user input again if somehow a mallicous entry also validate email address
-            var phoneOk = reg.test(req.body.mobile_phone);
-
-            //only sets our model mobile phone if the user input was sanitized properly
-            if (phoneOk)
-                user.mobile_phone = req.body.mobile_phone;
-        }
-
-        //if the username was provided then have to set our model username the save as the passed username
-        if (req.body.username!=null) { 
-            //test user input again if somehow a mallicous entry also validate email address
-            var phoneOk = reg.test(req.body.username);
-
-            //only sets our model username if the user input was sanitized properly
-            if (phoneOk)
-                user.username = req.body.username;
-        }
-
-        user.save();
-
-        res.redirect('/');
+        res.render('login',{unAuth:"true"});
     }
 }
 

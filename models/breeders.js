@@ -21,38 +21,49 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: false
       },
-      surname: {
+    surname: {
           type: DataTypes.STRING(255),
           allowNull: false
-      },
-      mobile_phone: {
+    },
+    mobile_phone: {
           type: DataTypes.STRING(255),
           allowNull: false
-      },
+    },
     address_1: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     address_2: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
     county: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     post_code: {
       type: DataTypes.STRING(255),
-      allowNull: true
-      },
-      kennel_name: {
+      allowNull: false
+    },
+    kennel_name: {
           type: DataTypes.STRING(255),
           allowNull: false
-      },
+    },
+    //registration number is provided by the government and must match submitted documents
     registration_number: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
+    //will point to the uploaded document to proof that breeder is registered in the country
+    documentation: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    //timestamp of when the profile was updated, while NULL breeder won't be able to save ads
     verified_at: {
       type: DataTypes.DATE,
       allowNull: true

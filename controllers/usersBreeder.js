@@ -74,3 +74,36 @@ exports.storeBreeder = async function(req, res) {
         }
     }
 }
+
+//to be accessed via GET:/breeders/profile
+//only call inside the middleware /config/auth/isLoggedIn
+exports.profile = function(req, res){
+    //selects the breeder profile based on the user.id (which is saved in our session from login)
+    var profile = DB.breeders.findOne({where: {user_id: req.session.user.id}});
+    //renders profile page with the profile object (the profile object might be null)
+    res.render("breeder-profile", {profile});
+}
+
+//to be accessed via PUT:/breeders/profile
+//only call inside the middleware /config/auth/isLoggedIn
+exports.updateProdile = async function(req, res){
+    if (req.session.user.user_type!='B')
+        res.render("user-profile", {Aunauth: true});
+    profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
+    //if profile doesn't exists yet, then creates a new one from the scratch
+    if (profile===null) {
+        profile = DB.breeders.build(req.body);
+        profile.user_id = req.session.user.id;
+    } 
+    //if it does exist only update a few fields
+    else {
+        profile.mobile_phone = req.body.mobile_phone;
+        profile.address_1 = req.body.address_1;
+        profile.address_2 = req.body.address_2;
+        profile.county = req.body.county;
+        profile.post_code = req.body.post_code;
+    }
+    profile.save();
+    //re-rendering the profile page
+    res.render("breeder-profile", {profile});
+}
