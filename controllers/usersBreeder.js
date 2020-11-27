@@ -93,7 +93,7 @@ exports.updateProdile = async function(req, res){
     try {
         //if user is not a breeder, then returns not authorized and the user profile page
         if (req.session.user.user_type!='B')
-            res.status(403).render("user-profile", {prifle: null});
+            res.status(403).render("user-profile", {profile: null});
         profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
         //if profile doesn't exists yet, then creates a new one from the scratch
         if (profile===null) {
@@ -116,7 +116,7 @@ exports.updateProdile = async function(req, res){
         if (e instanceof ValidationError) {
             res.status(400).render("breeder-profile", {e});    
         }
-        //if not it's an internal error and user shouldn't have access to it
+        //if not it's an internal error and user shouldn't have access to internal
         else {
             res.status(500).render("breeder-profile");       
         }
