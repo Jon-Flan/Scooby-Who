@@ -93,7 +93,7 @@ exports.updateProdile = async function(req, res){
     try {
         //if user is not a breeder, then returns not authorized and the user profile page
         if (req.session.user.user_type!='B')
-            res.status(403).render("user-profile", {profile: null});
+            res.status(403).render("user-profile");
         profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
         //if profile doesn't exists yet, then creates a new one from the scratch
         if (profile===null) {
