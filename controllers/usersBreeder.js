@@ -89,7 +89,7 @@ exports.profile = function(req, res){
 
 //to be accessed via PUT:/breeders/profile
 //only call inside the middleware /config/auth/isLoggedIn
-exports.updateProdile = async function(req, res){
+exports.updateProfile = async function(req, res){
     try {
         //if user is not a breeder, then returns not authorized and the user profile page
         if (req.session.user.user_type!='B')
@@ -97,7 +97,7 @@ exports.updateProdile = async function(req, res){
         profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
         //if profile doesn't exists yet, then creates a new one from the scratch
         if (profile===null) {
-            profile = DB.breeders.build(req.body);
+            profile = await DB.breeders.build(req.body);
             profile.user_id = req.session.user.id;
         } 
         //if it does exist only update a few fields
@@ -120,7 +120,5 @@ exports.updateProdile = async function(req, res){
         else {
             res.status(500).render("breeder-profile");       
         }
-
-        
     }
 }

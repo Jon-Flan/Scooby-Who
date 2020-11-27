@@ -26,12 +26,14 @@ function hashPass(password,cb){
     });
 };
 
+
 //middleware only called when user is accessing authenticated-only areas
 //if user is not logged in, redirects to the homepage
 function isLoggedIn(req, res, next){
     if (req.session.loggedin) {
         next();
     }
+    //if not means user is trying to access a route which hey are not allowed to, so renders index
     else {
         res.render('index', {user: null});
     }

@@ -83,3 +83,44 @@ exports.activateAccount = async function(req, res){
         }
     });
 }
+
+//to be accessed via GET:/users/profile
+//only call inside the middleware /config/auth/isLoggedIn
+exports.profile = function(req, res){
+    //selects the customer profile based on the user.id (which is saved in our session from login)
+    var profile = DB.customers.findOne({where: {user_id: req.session.user.id}});
+    //renders profile page with the profile object (the profile object might be null)
+    res.render("user-profile", {profile});
+}
+
+//to be accessed via PUT:/users/profile
+//only call inside the middleware /config/auth/isLoggedIn
+exports.updateProfile = async function(req, res){
+    try {
+        //if user is not a customer, then returns not authorized and the breeder profile page
+        if (req.session.user.user_type!='C')
+            res.status(403).render("user-profile");
+        profile = await DB.customers.findOne({where: {user_id: req.session.user.id}});
+        //if profile doesn't exists yet, then creates a new one from the scratch
+        if (profile===null) {
+            profile = DB.customers.build(req.body);
+            profile.user_id = req.session.user.id;
+        } 
+        //if it does exist only update a few fields
+        else {
+            profile.mobile_phone = req.body.mobile_phone;
+        }
+        await profile.save();
+        //re-rendering the profile page
+        res.render("user-profile", {profile});
+    } catch(e){
+        //if error was a validation then status must be 400 and the error can be passed to be shown to the user
+        if (e instanceof ValidationError) {
+            res.status(400).render("user-profile", {e});    
+        }
+        //if not it's an internal error and user shouldn't have access to internal
+        else {
+            res.status(500).render("user-profile");       
+        }        
+    }
+}

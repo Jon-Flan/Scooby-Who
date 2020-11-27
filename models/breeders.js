@@ -63,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    //timestamp of when the profile was updated, while NULL breeder won't be able to save ads
+    //timestamp of when the documents were confirmed, while NULL breeder won't be able to save ads
     verified_at: {
       type: DataTypes.DATE,
       allowNull: true

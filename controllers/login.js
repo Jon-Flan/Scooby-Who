@@ -46,7 +46,7 @@ exports.loginAttempt = async function(req, res) {
 					res.redirect('/');
 	    		//if not redirect to login page
 				}else
-	    			res.render('login',{unAuth:"true"});
+	    			res.status(401).render('login',{unAuth:"true"});
 	    	});
 	    }
     } else {
