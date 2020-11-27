@@ -33,7 +33,6 @@ function isLoggedIn(req, res, next){
         next();
     }
     else {
-        console.log('fudeu');
         res.render('index', {user: null});
     }
 }
