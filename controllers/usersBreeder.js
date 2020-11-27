@@ -16,6 +16,9 @@ const validator = require("email-validator");
 //class for sending emails
 const Mailer = require("../config/mailer");
 
+//to catch sequelize errors
+const {ValidationError} = require('sequelize');
+
 //breeder sign up page
 exports.breederSignUp = function (req, res){
     //can only create an account if not already loggged in
@@ -87,23 +90,37 @@ exports.profile = function(req, res){
 //to be accessed via PUT:/breeders/profile
 //only call inside the middleware /config/auth/isLoggedIn
 exports.updateProdile = async function(req, res){
-    if (req.session.user.user_type!='B')
-        res.render("user-profile", {Aunauth: true});
-    profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
-    //if profile doesn't exists yet, then creates a new one from the scratch
-    if (profile===null) {
-        profile = DB.breeders.build(req.body);
-        profile.user_id = req.session.user.id;
-    } 
-    //if it does exist only update a few fields
-    else {
-        profile.mobile_phone = req.body.mobile_phone;
-        profile.address_1 = req.body.address_1;
-        profile.address_2 = req.body.address_2;
-        profile.county = req.body.county;
-        profile.post_code = req.body.post_code;
+    try {
+        //if user is not a breeder, then returns not authorized and the user profile page
+        if (req.session.user.user_type!='B')
+            res.status(403).render("user-profile", {prifle: null});
+        profile = await DB.breeders.findOne({where: {user_id: req.session.user.id}});
+        //if profile doesn't exists yet, then creates a new one from the scratch
+        if (profile===null) {
+            profile = DB.breeders.build(req.body);
+            profile.user_id = req.session.user.id;
+        } 
+        //if it does exist only update a few fields
+        else {
+            profile.mobile_phone = req.body.mobile_phone;
+            profile.address_1 = req.body.address_1;
+            profile.address_2 = req.body.address_2;
+            profile.county = req.body.county;
+            profile.post_code = req.body.post_code;
+        }
+        await profile.save();
+        //re-rendering the profile page
+        res.render("breeder-profile", {profile});
+    } catch(e){
+        //if error was a validation then status must be 400 and the error can be passed to be shown to the user
+        if (e instanceof ValidationError) {
+            res.status(400).render("breeder-profile", {e});    
+        }
+        //if not it's an internal error and user shouldn't have access to it
+        else {
+            res.status(500).render("breeder-profile");       
+        }
+
+        
     }
-    profile.save();
-    //re-rendering the profile page
-    res.render("breeder-profile", {profile});
 }

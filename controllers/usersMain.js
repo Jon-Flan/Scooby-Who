@@ -28,36 +28,43 @@ exports.changePassword = function(req, res){
 
 //updates a userprofile via PUT:/users/change_password/:uuid
 exports.updatePassword = async function(req, res) {
-    var newPassword = req.body.new_password;
-    var oldPassword = req.body.old_password;
-    
-    ////used to sanitize user inputs 
-    var reg = new RegExp ("^[A-Za-z0-9#!@?&*]+$");
-    var passwordsOk = (reg.test(newPassword)) && (reg.test(oldPassword));
+    try {
+        var newPassword = req.body.new_password;
+        var oldPassword = req.body.old_password;
+        
+        ////used to sanitize user inputs 
+        var reg = new RegExp ("^[A-Za-z0-9#!@?&*]+$");
+        var passwordsOk = (reg.test(newPassword)) && (reg.test(oldPassword));
 
-    //if both passwords were provided and they were sanitized successfully
-    if(newPassword && oldPassword && passwordsOk){
-        //looks for a user in the DB by the UUID passed as a parameter
-        user = await DB.users.findOne({where: { uuid: req.params.uuid }});
+        //if both passwords were provided and they were sanitized successfully
+        if(newPassword && oldPassword && passwordsOk){
+            //looks for a user in the DB by the UUID passed as a parameter
+            user = await DB.users.findOne({where: { uuid: req.params.uuid }});
 
-        //if no user was found with that email, redirect to password change again with not authorized status
-        if (user===null) {
-            res.render('login',{unAuth: "true"});
-        } else {            
-            //compares the password provided by the user with the password from the database
-            bcrypt.compare(oldPassword, user.password, function(err, result){
-                //if comparison successful, then hashes new password and sets it to the model
-                if (result){
-                    crypto.hashPass(newPassword, function(hash){
-                        user.password = hash;
-                    });
-                    //saves new password
-                    user.save();
-                }
-            });
+            //if no user was found with that email, redirect to password change again with not authorized status
+            if (user===null) {
+                res.status(401).render('login',{unAuth: "true"});
+            } else {  
+                //compares the password provided by the user with the password from the database
+                await bcrypt.compare(oldPassword, user.password, async function(err, result){
+                    //if comparison successful, then hashes new password and sets it to the model
+                    if (result){
+                        await crypto.hashPass(newPassword, async function(hash){
+                            //saves new password
+                            user.password = hash;
+                            await user.save();
+                            res.render('change-password');
+                        });
+                    }
+                });
+            }
+        } 
+        //if password failed to sanitize then returs error 400
+        else {
+            res.status(400).render('change-password');
         }
-    } else {
-        res.render('login',{unAuth:"true"});
+    } catch(e){
+        res.status(500).render('change-password');
     }
 }
 
