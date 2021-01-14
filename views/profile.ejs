@@ -1,0 +1,144 @@
+<%- include ("../partials/mainHeader") %>
+
+<%if(user.user_type === "C") { %>
+    <div id="profilePage" class="container target">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 class="userName"><%= user.username %></h1>  
+                <a href="/editProfile" class="btn btn-info">Edit Profile</a>
+                <br>
+            </div>
+            <div class="col-sm-2">
+                <a href="#" class="pull-right">
+                    <img title="profile image" class="img-circle img-responsive" src="/profileImages/default.jpg">
+                </a>
+            </div>
+        </div>
+    <br>
+    <div class="col-sm-8 col-sm-offset-2" style="" contenteditable="false">
+        
+        <div class="panel panel-primary target">
+            <div class="panel-heading" contenteditable="false">
+                Details:
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="list-group">
+                            <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Profile</li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name:</strong></span> <%=userDetails.name %> <%=userDetails.surname %></li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span> <%= user.email %></li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone: </strong></span> <%=userDetails.mobile_phone %></li>
+                        </ul>
+                        <ul class="list-group">
+                            <li class="list-group-item text-muted list-group-item-warning">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined:</strong></span> <%= joinDate %></li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last Updated:</strong></span> <%= updatedAt %></li>
+                        </ul>
+                     </div>
+                 </div>
+            </div>
+        </div>
+<% } else if(user.user_type === "B"){ %>
+    <div id="profilePage" class="container target">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 class="userName"><%= userDetails.kennel_name %></h1> 
+                <a href="/editProfile" class="btn btn-info">Edit Profile</a>
+                <br>
+            </div>
+            <div class="col-sm-2">
+                <a href="/users" class="pull-right">
+                    <img title="profile image" class="img-circle img-responsive" src="/profileImages/default.jpg">
+                </a>
+            </div>
+        </div>
+    
+    <br>
+    
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Profile</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Username:</strong></span> <%= user.username %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name:</strong></span> <%= userDetails.name %> <%= userDetails.surname %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span> <%= user.email %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone: </strong></span> <%= userDetails.mobile_phone %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address 1: </strong></span> <%= userDetails.address_1 %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address 2: </strong></span> <%= userDetails.address_2 %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">City: </strong></span><%= userDetails.city %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">County: </strong></span><%= userDetails.county %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Postcode: </strong></span><%= userDetails.post_code %></li>
+                </ul>
+            
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Kennel Registration Number:
+                    </div>
+                <div class="panel-body"><i style="color:green" class="fa fa-check-square"></i> 
+                    <%= userDetails.registration_number %>
+                </div>
+        </div>
+
+    
+        <ul class="list-group">
+            <li class="list-group-item text-muted list-group-item-warning">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined:</strong></span> <%= joinDate %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last Updated:</strong></span> <%= updatedAt %></li>
+        </ul>
+    </div>
+    
+    
+    <div class="col-sm-9" style="" contenteditable="false">
+        <div id="myDogAdverts" class="panel panel-primary target">
+            <div  class="panel-heading" contenteditable="false">
+                My Dogs:
+                <a href="/createAdd" class="btn btn-info">Create Advert</a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <% adverts.forEach(function(adverts){ %>
+    
+                            <div class="panel panel-primary target">
+                                <div class="panel-heading" contenteditable="false">
+                                    <h4><%= adverts.title %></h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="thumbnail">
+                                                <img alt="300x200" src="/profileImages/defaultAdpic.jpg">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3>Price: $<%= adverts.price %></h3>
+                                            <p>Breed: <%= adverts.breed %></p>
+                                            <p>Sex: <%= adverts.sex %></p>
+                                            <p>Age: <%= adverts.age %></p>
+                                            <p>Qty: <%= adverts.actual_quantity %></p>
+                                            <p>Last Updated: <%= adverts.updated_at%></p>
+                                            <p>Views: <%= adverts.views %></p>
+                                            <a href="/editAdvert/<%= adverts.id %>"class="btn btn-warning btn-sm">Edit Advert</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5><%= adverts.body %></h5>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>

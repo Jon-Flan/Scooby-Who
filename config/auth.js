@@ -17,6 +17,7 @@ function login(password1, password2, req,cb){
     });
 }
 
+//function to hash the password passed in by the user
 function hashPass(password,cb){
 
     bcrypt.genSalt(10, function(err, salt){

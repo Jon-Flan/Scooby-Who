@@ -6,6 +6,7 @@ var rateLimit = require("express-rate-limit");
         rateLimit({
         max: 30,// max requests
         windowMs: 60 * 60 * 1000, // per 1 Hour
+        skipSuccessfulRequests: true,
         handler: function (req, res) {
                 res.send("Oops too many requests");
                 },

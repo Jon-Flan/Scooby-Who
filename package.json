@@ -6,7 +6,7 @@
   "scripts": {
     "prod": "NODE_ENV=production node server-env.js",
     "start": "NODE_ENV=development node server-env.js",
-    "nodemon": "nodemon NODE_ENV=development node server-env.js"
+    "nodemon": "node server-env.js"
   },
   "author": "Jonathan Flanagan, Neil Fizgerald and Adolfo Carvalho",
   "license": "ISC",

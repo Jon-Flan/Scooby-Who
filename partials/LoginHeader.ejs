@@ -3,23 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="/favicon/dog-203766/favicon.ico" /> <!-- Browser Tab Icon -->
-    <link rel="stylesheet" type="text/css" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet"> <!-- Google font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- FontAwesome CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- JQuery for nav animations -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- Sweet alert CDN for popups-->
 
+
+    <link rel="stylesheet" type="text/css" href="/style/styling.css">
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+    
     <title>Scooby</title>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav id="navHeader" class="navbar navbar-dark navbar-fixed-top">
 
+        <div class="container-fluid">
 
-<!--Start of Main content Body -->
-<section>
-    <!-- Top bar -->
-    <div class="topBar">
-        <h2>ScoobyWho</h2>
-        <a id="SignUp" href="/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>SignUp</a>
-        <a id="Home" href="/"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
-    </div>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ScoobyWho</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/sign_up">Sign-Up</a></li> 
+            </ul>
+          </div><!-- /.navbar-collapse -->
+
+        </div>
+    </nav>

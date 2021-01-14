@@ -18,12 +18,12 @@ function security(app){
     app.use(helmet.contentSecurityPolicy({directives:{
         defaultSrc:["'self'"],
         scriptSrc:["'self'",'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
-        'https://unpkg.com/sweetalert/dist/sweetalert.min.js',"'unsafe-inline'"],
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js','https://stackpath.bootstrapcdn.com/','https://code.jquery.com/',"'unsafe-inline'"],
         styleSrc:["'self'", "'unsafe-inline'",
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', 
-            'https://fonts.googleapis.com/'],
+            'https://fonts.googleapis.com/','https://stackpath.bootstrapcdn.com/'],
         fontSrc:["'self'", 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/',
-            'https://fonts.gstatic.com/s/nunito/']
+            'https://fonts.gstatic.com/s/nunito/','https://stackpath.bootstrapcdn.com/']
     }}));
 }
 
