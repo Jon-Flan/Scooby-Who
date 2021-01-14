@@ -41,6 +41,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
+    city: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
     post_code: {
       type: DataTypes.STRING(255),
       allowNull: true
@@ -50,6 +54,10 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
       },
     registration_number: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    documentation: {
       type: DataTypes.STRING(255),
       allowNull: true
     },

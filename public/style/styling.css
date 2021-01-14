@@ -1,0 +1,57 @@
+#navHeader{
+    background-color: #0492C2;
+}
+
+body{
+    height: 100vh;
+    background-color:#484848; 
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.7)),url(/images/bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+
+.navbar a{
+    color: #fff;
+}
+
+.icon-bar{
+    background-color: #fff;
+}
+
+.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
+    background-color: #484848;
+    color: #fff;
+}
+
+.filtersContainer{
+    width: 550px;
+    padding: 0px;
+}
+
+#profilePage{
+    margin-top: 65px;
+}
+
+#advertPage{
+    margin-top: 95px;
+}
+
+.userName{
+    color: #fff;
+}
+
+#myDogAdverts{
+    overflow-y: scroll;
+    height: 850px;
+}
+
+.wrapper{
+    align-items: center;
+    padding-left: 10%;
+    overflow-y: scroll;
+    width: 100%;
+}

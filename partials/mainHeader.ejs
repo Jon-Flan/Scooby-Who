@@ -3,52 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="/favicon/dog-203766/favicon.ico" /> <!-- Browser Tab Icon -->
-    <link rel="stylesheet" type="text/css" href="/style/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet"> <!-- Google font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- FontAwesome CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- JQuery for nav animations -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- Sweet alert CDN for popups-->
+
+
+    <link rel="stylesheet" type="text/css" href="/style/styling.css">
+
+    
     <title>Scooby</title>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav id="navHeader" class="navbar navbar-dark navbar-fixed-top">
 
-     <!-- Burger Menu  -->
-     <input type="checkbox" id="check" name="checkbox" />
-     <label for="check">
-       <div class="burger">
-         <div class="bar1"></div>
-         <div class="bar2"></div>
-         <div class="bar3"></div>
-       </div>
-     </label>
+        <div class="container-fluid">
 
-<!-- Top Bar Navigation -->
-<aside>
-    <div class="topnav">
-      <!-- different nav bars depending on if a user is logged in or not-->
-        <% if(user === null){ %>
-            <a id="SignIn" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>SignIn</a>
-            <a id="SignUp" href="/sign_up"><i class="fa fa-user-plus" aria-hidden="true"></i>SignUp</a>
-        <%  }else{ %>
-            <div class="dropdown">
-              <button class="dropbtn"><i class="fa fa-user"></i><%= user.username %> &#9660;</button>
-                <div class="dropdown-content">
-                  <a href="#">Edit Profile</a>
-                  <a href="#">Messages</a>
-                  <a href="/logout">Logout</a>
-                </div>
-            </div>
-        <%  } %>
-        <br>
-        <br>
-        <!-- filter section will be here -->
-        <span ><h5 class="filter"><i class="fa fa-filter"></i>Filters: Filters will go here</h5></span>
-    </div>
-</aside>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ScoobyWho</a>
+          </div>
 
-<!--Start of Main content Body -->
-<section>
-    <!-- Top bar -->
-    <div class="topBar">
-        <h2>ScoobyWho</h2>
-    </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="/about">About</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="container filtersContainer">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="panel panel-primary">
+                            <div class="panel-heading">Choose Filters: </div>
+                            <div class="panel-body">
+                              <form name="FiltersForm" accept-charset="UTF-8" action='/filters' method='post'>
+                                <div class="form-group">
+                                  <label>Breed: </label>
+                                  <select class="form-control form-control-lg" name="breed">
+                                    <option>All</option>
+                                    <%adverts.forEach(function(adverts){ %>
+                                      <option><%=adverts.breed %></option>
+                                    <%});%>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label>Price: </label>
+                                  <select class="form-control form-control-lg" name="price">
+                                    <option>Low to High</option>
+                                    <option>High to Low</option>
+                                  </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a href="/" class="btn btn-warning">Clear</a>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+              <% if(user === null) { %>
+              <li><a href="/login">Sign-In</a></li>
+              <li><a href="/sign_up">Sign-Up</a></li>
+              <% } else{ %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.username %><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/profile">Profile</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout">Logout</a></li>
+                  </ul>
+                </li>
+              <% } %>  
+            </ul>
+          </div><!-- /.navbar-collapse -->
+
+        </div>
+    </nav>

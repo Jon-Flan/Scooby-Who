@@ -14,6 +14,7 @@ function viewEngine(app){
     app.use('/favicon',express.static(__dirname + "/favicon"));
 
 
+
     //set the view engine
     app.set('view engine', 'ejs');
     app.engine('html', require('ejs').renderFile);

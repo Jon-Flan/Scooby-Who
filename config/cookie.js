@@ -1,6 +1,7 @@
 //imports
 var session = require("cookie-session")
 
+//function to create a cookie session
 function cookie(app){
     // Use session for identifying logged in user
     app.use(session({

@@ -33,6 +33,10 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING(255),
           allowNull: false
       },
+      age: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
       actual_quantity: {
           type: DataTypes.SMALLINT.UNSIGNED,
           allowNull: false
@@ -43,6 +47,11 @@ module.exports = function(sequelize, DataTypes) {
       },
     views: {
       type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      defaultValue: 0
+    },
+    price: {
+      type: DataTypes.DOUBLE.UNSIGNED,
       allowNull: false,
       defaultValue: 0
     },

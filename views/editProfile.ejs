@@ -1,0 +1,49 @@
+<%- include ("../partials/updateProfileHeader") %>
+
+<% if(user.user_type === "C"){ %> 
+
+        <form class="formProfile edit_profile" id="form1" name="editProfile" accept-charset="UTF-8" action='/profileEdit' method='post'>
+            <h2>Edit your Profile</h2>
+            <p>You can edit certain items in your profile here</p>
+            <br>
+    <%} else if(user.user_type === "B"){ %>
+
+        <form class="formProfile edit_profile" id="form2" name="editProfile1" accept-charset="UTF-8" action='/profileEdit' method='post'>
+            <h2>Edit your Profile</h2>
+            <span>As a business and because your IKC number is tied to your 
+                kennel name & address, you cannot edit these. 
+                To change them you will need to setup a new account and get re-verfied</span>
+                <br>
+   <% } %>
+
+   <label>
+    <i class="fa fa-user"></i>
+    <input type="text" name="username" placeholder=<%=user.username %> maxlength="35">
+</label>
+<label>
+    <i class="fa fa-user"></i>
+    <input type="text" name="name" placeholder=<%=userDetails.name %> maxlength="35">
+</label>
+<label>
+    <i class="fa fa-user"></i>
+    <input type="text" name="surname" placeholder=<%=userDetails.surname%> maxlength="35">
+</label>
+<label>
+    <i class="fa fa-phone"></i>
+    <input type="text" name="phone" placeholder=<%=userDetails.mobile_phone%> maxlength="14">
+</label>
+
+<button class="submit" type="submit">Update</button>
+<p>If you would like to change your password: <a href="/passwordChange" class="btn btn-warning btn-xs">Click Here</a></p>
+<br>
+<p>If you would like to delete your account: <a href="/deleteProfile" class="btn btn-danger btn-xs">Click Here</a></p>
+</form>
+</section>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>

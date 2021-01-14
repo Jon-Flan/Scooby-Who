@@ -14,7 +14,6 @@ body {
   font-weight: 300;
   background-color: #484848;
   color: #fff;
-  overflow: hidden;
 }
 
 aside,
@@ -262,6 +261,52 @@ width: 450px;
 height: 350px;
 background-color:transparent;
 text-align: center;
+}
+
+.formProfile{
+  position: relative;
+  margin: auto;
+  width: 540px;
+  height: 820px;
+  text-align: center;
+  margin-top: 90px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: solid 2px #fff;
+  border-radius: 9px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.formProfilelabel {
+  display: block;
+  width: 400px;
+  margin: 25px auto;
+  text-align: center;
+}
+
+
+.formAdvert{
+  position: relative;
+  margin: auto;
+  width: 540px;
+  height: 650px;
+  text-align: center;
+  margin-top: 50px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: solid 2px #fff;
+  border-radius: 9px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#advertDesc{
+  width:100%;
+  height: 100px;
+  color: #0492C2;
+}
+
+#adImage{
+  margin-bottom: 5px;
 }
 
 label {
@@ -529,6 +574,76 @@ form a {
   background-color: #484848;
   color: #0492C2;
 }
+
+/** Profile poge styling **/
+#profile_content{
+  width:90%;
+  height: 85%;
+  top: 2em;
+  margin: auto;
+  border-radius: 10px;
+  border: solid 3px #fff;
+  background-color:rgba(0, 0, 0, 0.8);
+  overflow-y: scroll;
+}
+
+#upperContainer{
+  border-bottom: solid 2px #fff;
+  padding-bottom: 2%;
+}
+
+.headingTxt{
+  text-align: center;
+}
+
+#user_details{
+  margin-left: 5%;
+}
+
+#editBtn:link, #editBtn:visited{
+  background-color: #0492C2;
+  color: white;
+  padding: 10px 21px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#editBtn:hover, #editBtn:active {
+  background-color: #fff;
+  color: #0492C2;
+}
+
+/** Purchases & Reviews **/
+
+#middleContainer{
+  border-bottom: solid 2px #fff;
+  padding-bottom:  2%;
+}
+
+.containerInner{
+  text-align: center;
+}
+
+.containerInner_alert{
+  color: red;
+  text-align: center;
+}
+
+#redirectBtn:link, #redirectBtn:visited{
+  background-color: #00ff7f;
+  color: white;
+  padding: 10px 21px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#redirectBtn:hover, #redirectBtn:active {
+  background-color: #fff;
+  color: #00ff7f;
+}
+
 
 /** Not being implemented just for testing **/
 #Updating {

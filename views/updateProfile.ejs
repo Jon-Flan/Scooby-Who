@@ -1,0 +1,83 @@
+<%- include ("../partials/updateProfileHeader") %>
+
+<% if(user.user_type === "C"){ %> 
+
+    <form class="form edit_profile" id="form1" name="editProfile" accept-charset="UTF-8" action='/profileUpdate' method='post'>
+        <h2><%= user.username %></h2>
+        <p>Add your name and phone number</p>
+        <label>
+            <i class="fa fa-user"></i>
+            <input type="text" name="name" placeholder="First Name" maxlength="35">
+        </label>
+        <label>
+            <i class="fa fa-user"></i>
+            <input type="text" name="surname" placeholder="Surname" maxlength="35">
+        </label>
+        <label>
+            <i class="fa fa-phone"></i>
+            <input type="text" name="phone" placeholder="Mobile Phone" maxlength="14">
+        </label>
+       
+        <button class="submit" type="submit">Update</button>
+    </form>
+    </section>
+    
+    <%} else if(user.user_type === "B"){ %>
+
+        <form class="formProfile edit_profile" id="form2" name="editProfile1" accept-charset="UTF-8" action='/profileUpdate' method='post'>
+            <h2><%= user.username %></h2>
+            <p>Add your Kennel name, your own name, phone number, kennel address, and your IKC Kennel registration number</p>
+            <label class="formProfilelabel">
+                <i class="fa fa-user"></i>
+                <input type="text" name="name" placeholder="First Name" maxlength="35">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-user"></i>
+                <input type="text" name="surname" placeholder="Surname" maxlength="35">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-phone"></i>
+                <input type="text" name="phone" placeholder="Mobile Phone" maxlength="14">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="address1" placeholder="Address line 1" maxlength="50">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="address2" placeholder="Address line 2" maxlength="50">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="city" placeholder="City" maxlength="30">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="county" placeholder="County" maxlength="25">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="postcode" placeholder="Postcode" maxlength="10">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-file-text-o"></i>
+                <input type="text" name="regNumber" placeholder="Kennel Reg Number" maxlength="14">
+            </label>
+            <label class="formProfilelabel">
+                <i class="fa fa-home"></i>
+                <input type="text" name="kennel" placeholder="Kennel Name" maxlength="30">
+            </label>
+           
+            <button class="submit" type="submit">Update</button>
+        </form>
+        </section>
+
+   <% } %>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>

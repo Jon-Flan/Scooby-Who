@@ -1,0 +1,97 @@
+<%- include ("../partials/mainHeader") %>
+
+
+    <div id="profilePage" class="container target">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1 class="userName"><%= breeder.kennel_name %></h1>
+                <a href="/viewPublicProfile/<%=breeder.user_id %>" class="btn btn-warning">View Profile</a>  
+                <br>
+            </div>
+            
+        </div>
+    
+    <br>
+    <% if(user === null){ %>
+        <!-- If not logged get a card to say log in to view breeder details-->
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Breeder Details</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class=""></strong>Info:</span>Login to view details</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class=""></strong></span><a href="/login" class="btn btn-success">Login</a></li>
+            </ul>
+        </div>
+    <% }else{ %>
+        <!-- IF logged in view this part-->
+        <div class="row">
+            <div class="col-sm-3">
+                
+                <ul class="list-group">
+                    <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Kennel Details</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name:</strong></span><%= breeder.kennel_name %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">IKC Registration Number </strong></span> <%= breeder.registration_number %></li>
+                </ul>
+
+                <ul class="list-group">
+                    <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Breeder Details</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name:</strong></span><%= breeder.name %> </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span> <%= breeder1.email %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone: </strong></span> <%= breeder.mobile_phone %></li>
+                </ul>
+
+                <ul class="list-group">
+                    <li class="list-group-item text-muted list-group-item-warning" contenteditable="false">Address</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address 1: </strong></span> <%= breeder.address_1 %> </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address 2: </strong></span> <%= breeder.address_2 %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">City: </strong></span><%= breeder.city %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">County: </strong></span><%= breeder.county %></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Postcode: </strong></span><%= breeder.post_code %></li>
+                </ul>
+            
+                <ul class="list-group">
+                    <li class="list-group-item text-muted list-group-item-warning">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Advert last updated at:</strong></span> <%= updatedAt %></li>
+                </ul>
+            </div>
+    <% } %>
+    
+    
+    
+    <div class="col-sm-9" style="" contenteditable="false">
+        
+        <div class="panel panel-primary target">
+            <div class="panel-heading" contenteditable="false">
+                <h4><%= advert.title %></h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <img alt="300x200" src="/profileImages/defaultAdpic.jpg">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Price: $<%= advert.price %></h3>
+                        <p>Breed: <%= advert.breed %></p>
+                        <p>Sex: <%= advert.sex %></p>
+                        <p>Age: <%= advert.age %></p>
+                        <p>Qty: <%= advert.actual_quantity %></p>
+                        <p>Views: <%= advert.views %></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5><%= advert.body %></h5>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</body>
+</html>
