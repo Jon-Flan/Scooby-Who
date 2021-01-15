@@ -33,6 +33,7 @@ class Mailer{
         //generating the token containing only the user's uuid
         const token = jwt.sign(uuid, process.env.ACCESS_TOKEN);
 
+        /** This section was used to send activation link using JWT but the gmail account being used started to block the emails as spam when there was a link in the email.
         //setting options for the welcome email
         this.mailOptions.subject = "Activate your account"
         this.mailOptions.to = emailTo;
@@ -44,6 +45,19 @@ class Mailer{
                 console.log(error);
             }
         });
+        */
+
+         //setting options for the welcome email
+         this.mailOptions.subject = "Thank You"
+         this.mailOptions.to = emailTo;
+         this.mailOptions.html = "<b>Thanks for registering with us!</b><p>Welcome to ScoobyWho. We're deligthed you have chosen us to help you find your next Dog. Welcome to the Family!</p><br/>.",
+ 
+         //sending an email and logging any errors        
+         this.transporter.sendMail(this.mailOptions, function(error, info){
+             if (error) {
+                 console.log(error);
+             }
+         });
     }
 
 }

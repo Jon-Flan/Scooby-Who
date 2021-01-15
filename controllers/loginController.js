@@ -22,8 +22,14 @@ exports.loginAttempt = async function(req, res) {
     if(email && password && passwordOk && emailOk){
     	//looks for a user in the DB with the provided email
     	//using findOne function coz shouldn't be 2 anyways
-        //also filtering to look only for activated users
+		//also filtering to look only for activated users
+		
+		/** This section was used to send activation link using JWT but the gmail account being used started to block the emails as spam when there was a link in the email.
     	user = await DB.users.findOne({where: {email: email, validated_at: {[DB.Sequelize.Op.not]: null}}});
+		*/
+		
+		user = await DB.users.findOne({where: {email: email}});
+
 
     	//if no user was found with that email, redirect to login with not authorized status
     	if (user===null) {

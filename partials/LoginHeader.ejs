@@ -36,17 +36,29 @@
             <a class="navbar-brand" href="/">ScoobyWho</a>
           </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
-              <li><a href="/about">About</a></li>
-            </ul>
-            
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/sign_up">Sign-Up</a></li> 
-            </ul>
-          </div><!-- /.navbar-collapse -->
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <% if(user === null) { %>
+            <li><a href="/login">Sign-In</a></li>
+            <li><a href="/sign_up">Sign-Up</a></li>
+            <% } else{ %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.username %><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/profile">Profile</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            <% } %>  
+          </ul>
+        </div><!-- /.navbar-collapse -->
 
         </div>
     </nav>

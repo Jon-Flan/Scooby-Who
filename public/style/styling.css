@@ -6,7 +6,6 @@ body{
     height: 100vh;
     background-color:#484848; 
     font-family: 'Nunito', sans-serif;
-    overflow: hidden;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.7)),url(/images/bg.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -46,7 +45,7 @@ body{
 
 #myDogAdverts{
     overflow-y: scroll;
-    height: 850px;
+    height: 470px;
 }
 
 .wrapper{

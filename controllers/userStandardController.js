@@ -61,9 +61,11 @@ exports.storeUser = async function(req, res) {
                 newUser.user_type = 'C';
                 newUser.save();
 
+                /** This section was used to send activation link using JWT but the gmail account being used started to block the emails as spam when there was a link in the email.
                 //sending a welcome e-mail so user can activate their account
                 var mailer = new Mailer();
                 mailer.sendWelcomEmail(newUser.uuid, newUser.email);
+                */
             });  
              //if everything is ok render the SignUp page with pop up message of verification
             res.render('SignUp',{verify: true});         
