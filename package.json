@@ -4,9 +4,7 @@
   "description": "Scooby Who project for 3rd Year NCI Team Project Module, a ecommerce website for buying and selling of dogs",
   "main": "server.js",
   "scripts": {
-    "prod": "NODE_ENV=production node server-env.js",
-    "start": "NODE_ENV=development node server-env.js",
-    "nodemon": "node server-env.js"
+    "start": "node server-env.js"
   },
   "author": "Jonathan Flanagan, Neil Fizgerald and Adolfo Carvalho",
   "license": "ISC",
