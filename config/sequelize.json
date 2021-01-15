@@ -4,20 +4,23 @@
     "password": "[d0G84@c2",
     "database": "db1518531_d0gz845c",
     "host": "mysql4364.cp.blacknight.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
 "test": {
   "username": "u1518531_d0gr3",
       "password": "[d0G84@c2",
       "database": "db1518531_d0gz845c",
       "host": "mysql4364.cp.blacknight.com",
-      "dialect": "mysql"
+      "dialect": "mysql",
+      "logging": false
 },
   "production": {
       "username": "u1518531_d0gr3",
       "password": "[d0G84@c2",
       "database": "db1518531_d0gz845c",
       "host": "mysql4364.cp.blacknight.com",
-      "dialect": "mysql"
+      "dialect": "mysql",
+      "logging": false
   }
 }
